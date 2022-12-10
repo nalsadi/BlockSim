@@ -73,6 +73,7 @@ class Statistics:
     ########################################################### Print simulation results to Excel ###########################################################################################
     def print_to_excel(fname):
 
+        print("Number of Miners: ", [len(p.NODES)], [p.Binterval])
         df1 = pd.DataFrame({'Block Time': [p.Binterval], 'Block Propagation Delay': [p.Bdelay], 'No. Miners': [len(p.NODES)], 'Simulation Time': [p.simTime]})
         #data = {'Stale Rate': Results.staleRate,'Uncle Rate': Results.uncleRate ,'# Stale Blocks': Results.staleBlocks,'# Total Blocks': Results.totalBlocks, '# Included Blocks': Results.mainBlocks, '# Uncle Blocks': Results.uncleBlocks}
 

@@ -41,7 +41,7 @@ class InputsConfig:
     ''' Input configurations for Bitcoin model '''
     if model == 1:
         ''' Block Parameters '''
-        Binterval = 600  # Average time (in seconds)for creating a block in the blockchain
+        Binterval = 200  # Average time (in seconds) for creating a block in the blockchain
         Bsize = 1.0  # The block size in MB
         Bdelay = 0.42  # average block propogation delay in seconds, #Ref: https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/
         Breward = 12.5  # Reward for mining a block
@@ -60,8 +60,12 @@ class InputsConfig:
         NODES = []
         from Models.Bitcoin.Node import Node
         # here as an example we define three nodes by assigning a unique id for each one + % of hash (computing) power
-        NODES = [Node(id=0, hashPower=50), Node(
-            id=1, hashPower=20), Node(id=2, hashPower=30)]
+        import numpy as np 
+        vals = np.random.dirichlet(np.ones(Nn),size=1)[0]*100
+        for i,val in enumerate(vals):
+            NODES.append(Node(id=i, hashPower=val))
+        #NODES = [Node(id=0, hashPower=50), Node(
+            #id=1, hashPower=20), Node(id=2, hashPower=30)]
 
         ''' Simulation Parameters '''
         simTime = 10000  # the simulation length (in seconds)

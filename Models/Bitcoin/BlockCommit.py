@@ -69,7 +69,9 @@ class BlockCommit(BaseBlockCommit):
     # Upon generating or receiving a block, the miner start working on the next block as in POW
     def generate_next_block(node,currentTime):
 	    if node.hashPower > 0:
-                 blockTime = currentTime + c.Protocol(node) # time when miner x generate the next block
+                 miningtime = c.Protocol(node)
+                 blockTime = currentTime + miningtime # time when miner x generate the next block
+                 print(miningtime)
                  Scheduler.create_block_event(node,blockTime)
 
     def generate_initial_events():

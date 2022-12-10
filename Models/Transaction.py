@@ -1,8 +1,9 @@
 import random
 from InputsConfig import InputsConfig as p
 import numpy as np
-import Models.Network
+from Models.Network import Network
 import operator
+import copy
 
 
 class Transaction(object):
