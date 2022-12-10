@@ -71,7 +71,6 @@ class BlockCommit(BaseBlockCommit):
 	    if node.hashPower > 0:
                  miningtime = c.Protocol(node)
                  blockTime = currentTime + miningtime # time when miner x generate the next block
-                 print(miningtime)
                  Scheduler.create_block_event(node,blockTime)
 
     def generate_initial_events():
