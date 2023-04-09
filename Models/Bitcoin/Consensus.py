@@ -16,7 +16,7 @@ class Consensus(BaseConsensus):
         ##### Start solving a fresh PoW on top of last block appended #####
         TOTAL_HASHPOWER = sum([miner.hashPower for miner in p.NODES])
         hashPower = miner.hashPower/TOTAL_HASHPOWER ## Change this to hash power in 
-        avg_hashpower = TOTAL_HASHPOWER*10e9 #/len([miner.hashPower for miner in p.NODES])*10e9
+        avg_hashpower = miner.hashPower*10e9 #/len([miner.hashPower for miner in p.NODES])*10e9
         print(avg_hashpower)
         file1 = open("diff.txt","r+")
         data = file1.read().split(';')
@@ -25,9 +25,9 @@ class Consensus(BaseConsensus):
         iteration = int(data[2])
         file1.close()
         print(iteration)
-        if iteration == 1000: 
-            avg_hashpower = avg_hashpower * 2
-            hashtime = difficulty*  2**32 / (avg_hashpower)
+        #if iteration == 100: 
+         #   avg_hashpower = avg_hashpower /40#* 2
+          #  hashtime = difficulty*  2**32 / (avg_hashpower)
         #hashtime = difficulty * 2**32 / (avg_hashpower)
         #print(avg_hashpower)
         #print(hashtime)
@@ -48,10 +48,13 @@ class Consensus(BaseConsensus):
         file1 = open("hashtime.csv","a+")
         file1.write(str(hashtime + control * 2**32 / (avg_hashpower) * 0.01)+',')
         file1.close()
+        file1 = open("diff.csv","a+")
+        file1.write(str(control)+',')
+        file1.close()
 
         #print("control" , control)
         print("hashtime1 ", hashtime + control * 2**32 / (avg_hashpower) * 0.01)
-        return hashtime + control * 2**32 / (avg_hashpower) * 0.01
+        return random.expovariate(1/(hashtime + control * 2**32 / (avg_hashpower) * 0.01))
 
 
 

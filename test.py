@@ -32,7 +32,7 @@ if __name__ == '__main__':
     boiler = WaterBoiler()
     water_temp = boiler.water_temp
 
-    pid = PID(50, 0.1, 0.4, setpoint=water_temp)
+    pid = PID(50, 10, 0, setpoint=water_temp)
     #pid.output_limits = (-100, 100)
 
     start_time = time.time()
@@ -56,12 +56,12 @@ if __name__ == '__main__':
         pid.setpoint = 60
 
         last_time = current_time
-        time.sleep(0.8)
+        time.sleep(0.75)
 
     plt.plot(x, y, label='measured')
     plt.plot(x, setpoint, label='target')
-    plt.xlabel('time')
-    plt.ylabel('temperature')
+    plt.xlabel('Time')
+    plt.ylabel('Hash Time')
     plt.legend()
     if os.getenv('NO_DISPLAY'):
         # If run in CI the plot is saved to file instead of shown to the user
